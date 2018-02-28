@@ -1,0 +1,10 @@
+{
+  "name": "12-factor-app-example-image-storage-nodejs",
+  "version": "1.0.0",
+  "description": "Example of an image storage service implemented in Node.js according to the 12 factor app manifest.",
+  "main": "index.js",
+  "repository": "https://github.com/maiermic/12-factor-app-example-image-storage-nodejs.git",
+  "author": "\"Michael Maier\" <maier1michael@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
