@@ -9,6 +9,9 @@ app.use(fileUpload());
 app.use('/', express.static(STATIC_IMAGE_DIRECTORY));
 app.put('/:filename', upload);
 app.post('/:filename', upload);
+app.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}!`);
+});
 
 async function upload(req, res) {
     if (!req.params.filename) {
@@ -34,7 +37,3 @@ async function upload(req, res) {
         res.status(500).send(`Error saving files ${err}`);
     }
 }
-
-app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}!`);
-});
