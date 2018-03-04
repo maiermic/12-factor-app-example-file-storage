@@ -9,8 +9,19 @@ app.use(fileUpload());
 app.use('/', express.static(STATIC_IMAGE_DIRECTORY));
 app.put('/:filename', upload);
 app.post('/:filename', upload);
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}!`);
+    // https://joseoncode.com/2014/07/21/graceful-shutdown-in-node-dot-js/
+    process.on('SIGTERM', async function shutdownGracefully() {
+        try {
+            console.log('shutdown server gracefully');
+            await server.close();
+            console.log('graceful shutdown done');
+        } catch (err) {
+            console.error('Unexpected error during graceful shutdown', err);
+        }
+        process.exit(0);
+    });
 });
 
 async function upload(req, res) {
