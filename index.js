@@ -2,11 +2,11 @@ const path = require('path');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
-const {PORT, STATIC_IMAGE_DIRECTORY} = process.env;
+const {PORT, STATIC_FILE_DIRECTORY} = process.env;
 const app = express();
 app.use(morgan('combined'));
 app.use(fileUpload());
-app.use('/', express.static(STATIC_IMAGE_DIRECTORY));
+app.use('/', express.static(STATIC_FILE_DIRECTORY));
 app.put('/:filename', upload);
 app.post('/:filename', upload);
 const server = app.listen(PORT, () => {
@@ -39,7 +39,7 @@ async function upload(req, res) {
         return res.status(400).send('Only one file can be uploaded.');
     }
     const file = files[0];
-    const filePath = path.join(STATIC_IMAGE_DIRECTORY, req.params.filename);
+    const filePath = path.join(STATIC_FILE_DIRECTORY, req.params.filename);
     console.log(`save file to "${filePath}"`);
     try {
         await file.mv(filePath);
