@@ -43,8 +43,10 @@ async function upload(req, res) {
     console.log(`save file to "${filePath}"`);
     try {
         await file.mv(filePath);
+        console.log(`file saved: "${filePath}"`);
         res.send('Files uploaded!');
     } catch (err) {
+        console.log(`Error saving files ${err}`);
         res.status(500).send(`Error saving files ${err}`);
     }
 }
